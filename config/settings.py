@@ -45,16 +45,17 @@ DJANGO_APPS = [
 ]
 
 APPLICATION_APPS = [
-    'products.apps.ProductsConfig'
+    'products.apps.ProductsConfig',
+    'cart.apps.CartConfig',
+    'accounts.apps.AccountsConfig',
+    'orders.apps.OrdersConfig',
+    'notifications.apps.NotificationsConfig',
     ]
 
 INSTALLED_APPS = DJANGO_APPS + APPLICATION_APPS
 
-
-
-
-
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
