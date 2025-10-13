@@ -50,6 +50,7 @@ APPLICATION_APPS = [
     'accounts.apps.AccountsConfig',
     'orders.apps.OrdersConfig',
     'notifications.apps.NotificationsConfig',
+    'stores.apps.StoresConfig',
     ]
 
 INSTALLED_APPS = DJANGO_APPS + APPLICATION_APPS
