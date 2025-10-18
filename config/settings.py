@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from django.contrib.messages import constants as messages
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,8 +28,8 @@ SECRET_KEY = os.getenv('SITE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = ["localhost","127.0.0.1"]
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,9 +43,12 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'debug_toolbar',
+    'taggit',
+    'widget_tweaks',
 ]
 
 APPLICATION_APPS = [
+    'pages.apps.PagesConfig',
     'products.apps.ProductsConfig',
     'cart.apps.CartConfig',
     'accounts.apps.AccountsConfig',
@@ -71,7 +75,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,6 +86,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -127,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -137,9 +142,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'config/staticfiles')]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+INTERNAL_IPS = [ "127.0.0.1",]
+
+MEDIA_ROOT=os.path.join(BASE_DIR, 'MEDIA')
+MEDIA_URL='/media/'
+
+TAGGIT_CASE_INSENSIVE=True
+MESSAGE_TAGS={
+    messages.ERROR: 'danger',
+    messages.SUCCESS: 'success',
+}

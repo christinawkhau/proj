@@ -39,6 +39,7 @@ class Command(BaseCommand):
 
                 Product.objects.create(
                     sku=item.get("sku"),
+                    name=item.get("name"),
                     description=item.get("description"),
                     price=item.get("price"),
                     stock=item.get("stock"),
