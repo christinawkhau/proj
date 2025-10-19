@@ -14,6 +14,8 @@
     <!-- Custom -->
     <link rel="stylesheet" href={% static 'css/style.css' %} />
 
+    
+
     <title>Science Park Shop {% block title %} {% endblock %}</title>
   </head>
   
@@ -35,3 +37,32 @@
 
   
 </html>
+
+<img src="{% static 'images/balloon-pink.png' %}" class="balloon" style="left: 10%;" />
+<img src="{% static 'images/balloon-blue.png' %}" class="balloon" style="left: 40%;" />
+<img src="{% static 'images/balloon-lilac.png' %}" class="balloon" style="left: 70%;" />
+
+<div class="ribbon">🎁 Holiday Boutique Special — Free Shipping All Week! 🎁</div>
+
+<div class="star" style="top: 20%; left: 30%;"></div>
+<div class="star" style="top: 50%; left: 60%;"></div>
+<div class="star" style="top: 80%; left: 10%;"></div>
+
+<img src="{% static 'images/balloon-pink.png' %}" class="balloon" style="left: 10%;" />
+<img src="{% static 'images/balloon-blue.png' %}" class="balloon" style="left: 40%;" />
+<img src="{% static 'images/balloon-lilac.png' %}" class="balloon" style="left: 70%;" />
+
+<canvas id="confetti-canvas"></canvas>
+
+
+<div class="star" style="top: 20%; left: 30%;"></div>
+<div class="star" style="top: 50%; left: 60%;"></div>
+<div class="star" style="top: 80%; left: 10%;"></div>
+
+<button onclick="toggleMusic()">🎶 Toggle Music</button>
+<audio id="holiday-music" src="{% static 'audio/holiday.mp3' %}" loop></audio>
+
+
+<div id="countdown"></div>
+
+
