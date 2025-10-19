@@ -1,7 +1,8 @@
+
 {% extends 'base.html' %}
 {% load humanize %}
 
-{% block title %} | {{product.name}} {% endblock title %}
+{% block name %} | {{product.name}} {% endblock name %}
 {% block content %} {% load static %} 
 
 <section id="showcase-inner" class="py-5 text-white">
@@ -39,7 +40,7 @@
     <section id="product" class="py-4">
       {% include 'partials/_alert.html' %}  
       <div class="container">
-        {% comment %} listings {% endcomment %}
+        {% comment %} products {% endcomment %}
         <a href={% url "products:products" %} class="btn btn-light mb-4">Back To Products</a>
         <div class="row">
           <div class="col-md-9">
@@ -50,6 +51,12 @@
 {% else %}
   <img src="{% static 'img/default.jpg' %}" alt="Default image" class="img-main img-fluid mb-3" />
 {% endif %}
+
+
+
+
+
+
 
             <!-- Thumbnails -->
             <div class="row mb-5 thumbs">
@@ -62,11 +69,16 @@
                 >
                 {% comment %} clinic-inside-1.jpg {% endcomment %}  
 
+
 {% if product.product_img1 and product.product_img1.url %}
-  <img src="{{ product.product_img1.url }}" alt="{{ product.name }}" class="img-main img-fluid mb-3" />
-{% else %}
-  <img src="{% static 'img/default.jpg' %}" alt="Default image" class="img-main img-fluid mb-3" />
+  <div class="col-md-2">
+    <a href="{{ product.product_img1.url }}" data-lightbox="home-images">
+      <img src="{{ product.product_img1.url }}" alt="" class="img-fluid" />
+    </a>
+  </div>
 {% endif %}
+
+
 
 
 
@@ -89,10 +101,13 @@
 
 
 {% if product.product_img2 and product.product_img2.url %}
-  <img src="{{ product.product_img2.url }}" alt="{{ product.name }}" class="img-main img-fluid mb-3" />
-{% else %}
-  <img src="{% static 'img/default.jpg' %}" alt="Default image" class="img-main img-fluid mb-3" />
+  <div class="col-md-2">
+    <a href="{{ product.product_img2.url }}" data-lightbox="home-images">
+      <img src="{{ product.product_img2.url }}" alt="" class="img-fluid" />
+    </a>
+  </div>
 {% endif %}
+
 
 
 
@@ -101,22 +116,23 @@
                 </a>
               </div>
               {% endif %}
+
             </div>
             <!-- Fields -->
             <div class="row mb-5 fields">
               <div class="col-md-6">
                 <ul class="list-group list-group-flush">
                   <div class="row py-2 text-secondary">
-                  <div class="col-6"><i class="fas fa-th-large"></i> Description {{product.description}}</div>
-                  <div class="col-6"><i class="fas fa-dumbbell"></i> Brand {{liproduct.brand}}</div>
+                  <div class="col-6"><i class="fas fa-th-large"></i> Price {{product.price}}</div>
+                  <div class="col-6"><i class="fas fa-dumbbell"></i> Description {{product.description}}</div>
                 </div>
                 <div class="row py-2 text-secondary">
-                  <div class="col-6"><i class="fas fa-bed"></i> Price {{product.price}}</div>
+                  <div class="col-6"><i class="fas fa-bed"></i> Brand {{product.brand}}</div>
                   <div class="col-6"><i class="fas fa-bath"></i> Tag {{product.tag}}</div>
                 </div>
                 <hr />
                 <div class="row py-2 text-secondary">
-                  <div class="col-12"><i class="fas fa-user"></i> {{product.category.description}}</div>
+                  <div class="col-12"><i class="fas fa-user"></i> {{product.name}}</div>
                 </div>
                 <div class="row text-secondary pb-2">
                   <div class="col-12">
@@ -125,63 +141,9 @@
                 </div>
                 </ul>
               </div>
-              <div class="col-md-6">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item text-secondary">
-                    <i class="fas fa-th-large"></i> Restrooms:
-                    <span class="float-right">Have</span>
-                  </li>
-                  <li class="list-group-item text-secondary">
-                    <i class="fas fa-square"></i> Specialized Care:
-                    <span class="float-right">No</span>
-                  </li>
-                  <li class="list-group-item text-secondary">
-                    <i class="fas fa-calendar"></i> Preventative Services:
-                    <span class="float-right">Have</span>
-                  </li>
-                  <li class="list-group-item text-secondary">
-                    <i class="fas fa-bed"></i> Minor Surgical Procedures:
-                    <span class="float-right">No</span>
-                  </li>
-                </ul>
-              </div>
             </div>
 
-            <!-- professional -->
-             <div class="row mb-5">
-              <h4 class="mr-3 text-secondary">SKU: </h4>
-               {% if listing.sku.all %}  <!-- Check if there are any professionals -->
-               <ul>
-                {% for sku in product.sku.all %}
-              <!--- Access fields from the Subject model (e.g., name)  -->
-                <li class="mr-3"><h4>{{ professional.name}}</h4></li>
-                {% endfor %}
-               </ul>
-               {% else %}
-               <h4> No Professionals </h4>
-               {% endif %}
-              </div>
 
-            <!-- services -->
-             <div class="row mb-5">
-              <h4 class="mr-3 text-secondary">Services: </h4>
-               {% if listing.services.all %}  <!-- Check if there are any services -->
-               <ul>
-                {% for professional in listing.services.all %}
-              <!--- Access fields from the Subject model (e.g., name)  -->
-                <li class="mr-3"><h4>{{ services.name}}</h4></li>
-                {% endfor %}
-               </ul>
-               {% else %}
-               <h4> No Services </h4>
-               {% endif %}
-              </div>
-
-
-
-
-            <!-- Description -->
-            <div class="row mb-5">
               <div class="col-md-12">{{listing.description}}
                 
               </div>
@@ -191,14 +153,17 @@
             <div class="card mb-3">
               
               {% comment %} kyle.jpg {% endcomment %}
-              <img
-                class="card-img-top" 
-                src={{product.category.category_img.url}}
-                alt="Seller of the month"
-              />
+
+
+{% if product.category.photo and product.category.photo.url %}
+  <img class="card-img-top" src="{{ product.category.photo.url }}" alt="Seller of the month" />
+{% else %}
+  <img class="card-img-top" src="{% static 'img/default-category.jpg' %}" alt="Default category image" />
+{% endif %}
+
               <div class="card-body">
-                <h5 class="card-title">Category</h5>
-                <h6 class="text-secondary">{{product.categogry.name}}</h6>
+                <h5 class="card-title">Super Food</h5>
+                <h6 class="text-secondary">{{product.category.name}}</h6>
               </div>
             </div>
             <button
@@ -206,7 +171,7 @@
               data-toggle="modal"
               data-target="#inquiryModal"
             >
-              Make An Inquiry
+              Make an enquiry
             </button>
           </div>
         </div>
@@ -218,16 +183,18 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
+            <h5 class="modal-title" id="inquiryModalLabel">Make an enquiry</h5>
             <button type="button" class="close" data-dismiss="modal">
               <span>&times;</span>
             </button>
           </div>
           <div class="modal-body">
-               <form action="{% url 'store' %}" method="POST">
+
+              <form action="{% url 'store' %}" method="POST">
+
               {% csrf_token %}
-              <input type="hidden" name="product_id" value="{{product.id}}" /> <!-- hide listing_id as user no need to see -->
-               <input type="hidden" name="store_email" value="{{stores.email}}" /> <!-- hide listing_id as user no need to see, listing relate to doctor and doctor has email-->
+              <input type="hidden" name="product_id" value="{{product.id}}" /> 
+               <input type="hidden" name="stores_email" value="{{stores.email}}" /> 
               
               {% if user.is_authenticated %}
               <input type="hidden" name="user_id" value="{{user.id}}"/>
@@ -235,7 +202,7 @@
               <input type="hidden" name="user_id" value="0" /> <!-- data id start from 1, so setting 0 mean it is not a database id, cannot eg 999 , set 0 no need to let user know-->
               {% endif %}
               <div class="form-group">
-                <label for="store" class="col-form-label" >Shop:</label>
+                <label for="shop" class="col-form-label" >Shop:</label>
                 <input
                   type="text"
                   name="product"
