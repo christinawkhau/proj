@@ -1,10 +1,11 @@
 
-name_choices = {"Snacks" : "Snacks",
-                   "Beverages" : "Beverages",
-                   "Stationary" : "Stationary", 
-                   "Fishing Gear" : "Fishing Gear",
-                   "Cycling Gear" : "Cycling Gear"
-}    
+# category_choices = {"Snacks" : "Snacks",
+#                    "Beverages" : "Beverages",
+#                    "Stationary" : "Stationary", 
+#                    "Fishing Gear" : "Fishing Gear",
+#                    "Cycling Gear" : "Cycling Gear",
+#                    "Computer Accessories" : "Computer Accessories",
+# }    
 
 brand_choices={
 "Nature's Bite":"Nature's Bite",
@@ -69,10 +70,11 @@ brand_choices={
 "CamClear":"CamClear"
 }
 
-price_choices = {
-    '100' : '100',
-    "200" : "200",
-    "300" : "300",
-    "400" : "400",
-    "500" : "500"
+tag_choices = {
+    'New' : 'New',
+    "Sale" : "Sale",
+    "Featured" : "Featured",
+    "Limited" : "Limited",
+    "Classic" : "Classic"
 }
+

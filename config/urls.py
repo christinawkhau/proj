@@ -6,9 +6,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 import debug_toolbar  
 
+from products import views
+
+
+
+
+
 urlpatterns = [
     path('', include("pages.urls", namespace="pages")),
-    path('products/', include("products.urls", namespace="products")),
+    path('products/', include("products.urls", namespace="products")),  
+    path('store/', views.store, name='store'),
+  
     #path('contacts/', include("contacts.urls", namespace="contacts")),
     #path('accounts/', include("accounts.urls", namespace="accounts")),
     path('admin/', admin.site.urls),

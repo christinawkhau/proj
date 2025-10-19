@@ -45,12 +45,19 @@
         <div class="row">
           <div class="col-md-9">
             <!-- Home Main Image -->
-            <img
-            {% comment %} clinic-1.jpg {% endcomment %}
-              src={{product.product_img.url}}
-              alt=""
-              class="img-main img-fluid mb-3"
-            />
+
+{% if product.product_img and product.product_img.url %}
+  <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="img-main img-fluid mb-3" />
+{% else %}
+  <img src="{% static 'img/default.jpg' %}" alt="Default image" class="img-main img-fluid mb-3" />
+{% endif %}
+
+
+
+
+
+
+
             <!-- Thumbnails -->
             <div class="row mb-5 thumbs">
                {% if product.product_img1 %}
@@ -61,11 +68,24 @@
                   data-lightbox="home-images"
                 >
                 {% comment %} clinic-inside-1.jpg {% endcomment %}  
-                  <img
-                    src={{product.product_img1.url}}
-                    alt=""
-                    class="img-fluid"
-                  />
+
+
+{% if product.product_img1 and product.product_img1.url %}
+  <div class="col-md-2">
+    <a href="{{ product.product_img1.url }}" data-lightbox="home-images">
+      <img src="{{ product.product_img1.url }}" alt="" class="img-fluid" />
+    </a>
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+
                 </a>
               </div>
               {% endif %}
@@ -78,11 +98,21 @@
                   data-lightbox="home-images"
                 >
                 {% comment %} clinic-inside-2.jpg {% endcomment %}  
-                  <img
-                    src={{product.product_img1.url}}
-                    alt=""
-                    class="img-fluid"
-                  />
+
+
+{% if product.product_img2 and product.product_img2.url %}
+  <div class="col-md-2">
+    <a href="{{ product.product_img2.url }}" data-lightbox="home-images">
+      <img src="{{ product.product_img2.url }}" alt="" class="img-fluid" />
+    </a>
+  </div>
+{% endif %}
+
+
+
+
+
+
                 </a>
               </div>
               {% endif %}
@@ -123,11 +153,14 @@
             <div class="card mb-3">
               
               {% comment %} kyle.jpg {% endcomment %}
-              <img
-                class="card-img-top" 
-                src={{product.category.photo.url}}
-                alt="Seller of the month"
-              />
+
+
+{% if product.category.photo and product.category.photo.url %}
+  <img class="card-img-top" src="{{ product.category.photo.url }}" alt="Seller of the month" />
+{% else %}
+  <img class="card-img-top" src="{% static 'img/default-category.jpg' %}" alt="Default category image" />
+{% endif %}
+
               <div class="card-body">
                 <h5 class="card-title">Super Food</h5>
                 <h6 class="text-secondary">{{product.category.name}}</h6>
@@ -156,7 +189,9 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="{% url 'stores:store' %}" method="POST">
+
+              <form action="{% url 'store' %}" method="POST">
+
               {% csrf_token %}
               <input type="hidden" name="product_id" value="{{product.id}}" /> 
                <input type="hidden" name="stores_email" value="{{stores.email}}" /> 

@@ -37,16 +37,16 @@
                       <option selected="true" value=''>
                         Category (All)
                       </option>
-                      {% for key, value in category_choices.items %}
-                      <option value="{{key}}">{{value}}</option>
+                      {% for category in categories %}
+                      <option value="{{category.name}}">{{category.name}}</option>
                       {% endfor %}
-                      
+
                     </select>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label class="sr-only">Brand</label>
                     <select name="brand" class="form-control">
-                      <option selected="true" disabled="disabled">
+                      <option selected="true" value=''>
                         Brand (All)
                         
                       </option>
@@ -57,11 +57,12 @@
                     </select>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <select name="price" class="form-control" id="type">
+                    <label class="sr-only">Tag</label>
+                    <select name="tag" class="form-control" id="type">
                       <option selected="true" value=''>
-                        Price (All)
+                        Tag (All)
                       </option>
-                      {% for key, value in price_choices.items %}
+                      {% for key, value in tag_choices.items %}
                       <option value="{{key}}">{{value}}</ option>
                       {% endfor %}
                       
@@ -88,19 +89,29 @@
           {% if products %}
 
           <!-- Listing 1 -->
+           
           {% for product in products %}
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="card listing-preview">
-              <img
-                class="card-img-top"
-                src={{product.product_img.url}}
-                alt=""
-              />
+           {% if product.product_img %}
+           <img
+            class="card-img-top"
+            src="{{ product.product_img.url }}"
+            alt="{{ product.name }}"
+           />
+          {% else %}
+           <img
+            class="card-img-top"
+            src="{% static 'img/default.jpg' %}"
+            alt="Default image"
+           />
+          {% endif %}
+           
               <div class="card-img-overlay">
               </div>
               <div class="card-body">
                 <div class="listing-heading text-center">
-                  <h4 class="text-primary">{{product.name}}</h4>
+                  <h4 class="text-primary">{{product.category}}</h4>
                   <p>
                     <i class="fas fa-map-marker text-secondary"></i> {{product.category | title}}                  
                   </p>
