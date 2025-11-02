@@ -17,6 +17,7 @@ class Command(BaseCommand):
         for item in products:
             filtered = {
                 "sku": item.get("sku"),
+                "name": item.get("title"),
                 "description": item.get("description"),
                 "price": item.get("price"),
                 "stock": item.get("stock"),
@@ -29,3 +30,5 @@ class Command(BaseCommand):
             json.dump(filtered_products, f, indent=4)
 
         self.stdout.write(self.style.SUCCESS(f"✅ Filtered data saved to {output_path}"))
+        
+     
